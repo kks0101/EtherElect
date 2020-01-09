@@ -35,7 +35,7 @@ App = {
     $.getJSON("Election.json", function(election){
       App.contracts.Election = TruffleContract(election);
       App.contracts.Election.setProvider(App.web3Provider);
-
+      App.listenForEvents();
       return App.render();
     });
   },
@@ -55,7 +55,7 @@ App = {
       });
     });
   },
-  
+
   render: function(){
     var electionInstance;
     var loader = $("#loader");
