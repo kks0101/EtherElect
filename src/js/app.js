@@ -75,6 +75,17 @@ App = {
       electionInstance = instance;
       return electionInstance.candidatesCount();
     }).then(function(candidatesCount){
+      electionInstance.expiryTime().then(function(expTime){
+        //count down timer 
+        //total Time for which timer will run in seconds
+        var totalTime = expTime.toNumber();
+        console.log(totalTime);
+        var cntdwn = new Date(0);
+        cntdwn.setUTCSeconds(totalTime)
+        console.log(cntdwn);
+        var cntdwnObject = $("#countDown");
+        cntdwnObject.countdown({until:cntdwn});
+      });
       var candidatesResults = $("#candidatesResults");
       candidatesResults.empty();
 
@@ -85,7 +96,6 @@ App = {
           var id = candidate[0];
           var name = candidate[1];
           var voteCount = candidate[2];
-
 
           var candidateTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + voteCount + "</td>";
           candidatesResults.append(candidateTemplate);
@@ -101,7 +111,6 @@ App = {
       }
       loader.hide();
       content.show();
-
     }).catch(function(error){
       console.warn(error);
     })

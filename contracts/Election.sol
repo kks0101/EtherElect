@@ -9,6 +9,12 @@ contract Election{
 	}
 	mapping(uint=> Candidate) public candidates;
 	mapping(address => bool) public voters;
+	//set the duration for which the election is valid
+	//use format -- a days + b months + c hours + d minutes + e seconds
+	uint private duration = 2 minutes;
+
+	//total time for which election is valid
+	uint public expiryTime = now + duration;
 	uint public candidatesCount;
 	
 	event votedEvent(
