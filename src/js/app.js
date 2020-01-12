@@ -84,7 +84,19 @@ App = {
         cntdwn.setUTCSeconds(totalTime)
         console.log(cntdwn);
         var cntdwnObject = $("#countDown");
-        cntdwnObject.countdown({until:cntdwn});
+        cntdwnObject.countdown({
+          until:cntdwn,
+          onTick: Callbacks,
+        });
+        function Callbacks(periods){
+          if($.countdown.periodsToSeconds(periods)<=0){
+            $("#electionBanner").html("Election result");
+            $("#endElection").html("Election has ended.");
+            $("#countDown").hide();
+            $('form').hide();
+            
+          }
+        }
       });
       var candidatesResults = $("#candidatesResults");
       candidatesResults.empty();
